@@ -19,6 +19,7 @@ Client.on('voiceStateUpdate', (oldState, newState) => {
         if (oldState.channel != null) {
             if (oldState.channel.members.size == 0 && oldState.channel.name.includes("⚙")) {
                 oldState.channel.delete()
+                console.log(`${oldState.channel.name} was deleted.`)
             }
         }
         // User Joins a voice channel
@@ -57,6 +58,7 @@ Client.on('voiceStateUpdate', (oldState, newState) => {
 
         if (oldState.channel.members.size == 0 && oldState.channel.name.includes("⚙")) {
             oldState.channel.delete()
+            console.log(`${oldState.channel.name} was deleted.`)
         }
 
     }
