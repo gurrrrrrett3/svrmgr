@@ -1,3 +1,3 @@
 # svrmgr
  
-A simple bot for managiing small servers
+A simple bot for managing small servers
