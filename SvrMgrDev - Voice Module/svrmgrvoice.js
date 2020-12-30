@@ -1,4 +1,6 @@
 const Discord = require('discord.js');
+const dotenv = require('dotenv');
+dotenv.config();
 const Client = new Discord.Client();
 
 console.log("Voice Module Starting...");
@@ -223,4 +225,4 @@ function SendCorrectUsageEmbed(reason) {
 
 
 
-Client.login('NzkzMzI1MDg4Njg1Njg2ODI0.X-qnkA.q-X4VIxp4UmQWT8cPzpm27kqyjc')
+Client.login(process.env.TOKEN)

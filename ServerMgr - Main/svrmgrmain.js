@@ -1,6 +1,9 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 const jsonfile = require('jsonfile');
+const dotenv = require('dotenv');
+dotenv.config();
+
 const Client = new Discord.Client();
 
 var data = {}; //start of member activeness tracker
