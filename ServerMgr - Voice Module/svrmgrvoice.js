@@ -43,6 +43,7 @@ Client.on('voiceStateUpdate', (oldState, newState) => {
                     }).then((channel) => {
                     channel.setParent(creationLocation);
                     newState.member.voice.setChannel(channel)
+                    console.log(`${newState.member.user.username} created a Channel.`)
                 })
 
 
@@ -93,7 +94,7 @@ Client.on('message', (message) => {
                 })
 
                 message.channel.send(SendSucessEmbed(`You invited ${mentionedUser.username} to your Private Channel!`, "They are now able to join, be sure to let them know!"))
-
+                console.log(`${mentionedMember.user.username} was added to ${message.member.user.username}'s Channel.`)
             } else {
                 message.channel.send(SendErrorEmbed("You can't do that!", "You need to mention a user to invite them!"))
             }
@@ -123,12 +124,12 @@ Client.on('message', (message) => {
                         VIEW_CHANNEL: false
                     })
                     //kick user
-
+                
                 if (mentionedMember.voice.channel == ownedChannel) mentionedMember.voice.setChannel(null);
 
 
                 message.channel.send(SendErrorEmbed(`You removed ${mentionedUser.username} from your Private Channel!`, "They are now unable to join."))
-
+                console.log(`${mentionedMember.user.username} was removed from ${message.member.user.username}'s Channel.`)
             } else {
                 message.channel.send(SendErrorEmbed("You can't do that!", "You need to mention a user to invite them!"))
             }
@@ -179,6 +180,7 @@ Client.on('message', (message) => {
             })
             channel.setUserLimit(userLimit)
             message.channel.send(SendSucessEmbed("Channel Creation success!", `You may now join your channel!`))
+            console.log(`${host} Created a looking for group post for ${parts[1]} with user limit ${parts[2]}.`)
 
 
         })
@@ -188,12 +190,7 @@ Client.on('message', (message) => {
 
     }
 
-    if (parts[0] == ";pay"){
-        console.log(parts)
-        const  rec = parts[1]
-        const value = parts[3]
-        message.channel.send(SendSucessEmbed("Payment Sucessfully Sent!", `You sent $${value} to ${rec}!`))
-    }
+    
 })
 
 
