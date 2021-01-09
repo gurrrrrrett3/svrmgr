@@ -64,7 +64,10 @@ Client.on('voiceStateUpdate', (oldState, newState) => {
     }
 
 
-
+    if (newState.member.voice.selfDeaf) {
+        const afk = newState.guild.afkChannel
+        newState.member.voice.setChannel(afk)
+    }
 })
 
 
