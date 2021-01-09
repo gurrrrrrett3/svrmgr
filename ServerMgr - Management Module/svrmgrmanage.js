@@ -24,11 +24,11 @@ Client.on('message', (message) => {
         if (parts[0] == ";ranch") {
             const ranchRole = message.guild.roles.cache.find(r => r.name === "Ranched")
             const victim = message.mentions.members.first();
-            const reason = parts[2]
+            const reason = parts[3]
             victim.roles.add(ranchRole)
 
             message.channel.send(SendSucessEmbed("Sucess",`Sucessfully ranched ${victim.user.username} for ${reason}!`))
-            victim.send(errorEmbed("You have been ranched for: " = reason, "You are unable to speak in text channels for an undertermined amount of time."))
+            victim.send(SendErrorEmbed("You have been ranched for: " + reason, "You are unable to speak in text channels for an undertermined amount of time."))
 
         }
 
