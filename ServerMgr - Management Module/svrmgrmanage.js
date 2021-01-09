@@ -27,6 +27,7 @@ Client.on('message', (message) => {
             const reason = parts[3]
             victim.roles.add(ranchRole)
 
+            if (reason = ""){reason = "No Reason Specified"}
             message.channel.send(SendSucessEmbed("Sucess",`Sucessfully ranched ${victim.user.username} for ${reason}!`))
             victim.send(SendErrorEmbed("You have been ranched for: " + reason, "You are unable to speak in text channels for an undertermined amount of time."))
 
