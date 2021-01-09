@@ -1,8 +1,6 @@
 const Discord = require('discord.js');
 const Client = new Discord.Client();
 const dotenv = require('dotenv');
-const fs = require('fs');
-const jsonfile = require('jsonfile')
 dotenv.config();
 
 console.log("Management Module Starting...");
