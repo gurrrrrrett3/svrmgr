@@ -27,7 +27,7 @@ Client.on('message', (message) => {
             const reason = parts[3]
             victim.roles.add(ranchRole)
 
-            if (reason = ""){reason = "No Reason Specified"}
+            if (reason == ""){reason = "No Reason Specified"}
             message.channel.send(SendSucessEmbed("Sucess",`Sucessfully ranched ${victim.user.username} for ${reason}!`))
             victim.send(SendErrorEmbed("You have been ranched for: " + reason, "You are unable to speak in text channels for an undertermined amount of time."))
 
@@ -37,7 +37,7 @@ Client.on('message', (message) => {
             const ranchRole = message.guild.roles.cache.find(r => r.name === "Ranched")
             const victim = message.mentions.members.first();
 
-            if (victim.roles.includes(ranchRole)){
+            if (victim.roles.valueOf(ranchRole.id) != -1 ){
             victim.roles.remove(ranchRole)
             }
 
@@ -45,11 +45,26 @@ Client.on('message', (message) => {
     }
 
     //non moderator
+    const disallowedArguementList = ["no u", "stfu"]
+    disallowedArguementList.forEach(element => {
+        if (message.content.toLowerCase().includes(element)) {
+            message.author.send(SendErrorEmbed("Disallowed Arguement!", `Your message contained "${element}", which is an illegal argument in this server.  Please get a better roast.`))
+            console.log(element)
+            message.delete()
+        }
 
+    });
+    if (message.channel.id = '802296637497016320')
+    if (message.attachments.size > 0 || message.content.includes("://") || message.author.bot) {
+        message.react("⏫").then(message.react('⏬'))
+    } else { 
+    
+    
+    message.author.send(SendErrorEmbed("Error: ", "Your message must contain an image or a link!"))
+    message.delete()
+    }
     } 
 })
-
-
 
 
 function SendErrorEmbed(title, message) {
@@ -68,5 +83,10 @@ function SendSucessEmbed(title, message) {
     return sucessEmbed
 }
 
+function sleep(ms) {
+    const start = Date.now()
+    for (; Date.now() - start < ms;) {} 
+    return
+}
 
 Client.login(process.env.TOKEN)
