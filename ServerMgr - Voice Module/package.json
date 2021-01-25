@@ -9,8 +9,11 @@
   "author": "Gucci_Garrett#9211",
   "license": "ISC",
   "dependencies": {
+    "@discordjs/opus": "^0.3.3",
     "discord.js": "^12.4.1",
     "dotenv": "^8.2.0",
-    "jsonfile": "^6.1.0"
+    "ffmpeg-static": "^4.2.7",
+    "jsonfile": "^6.1.0",
+    "say": "^0.16.0"
   }
 }
