@@ -54,7 +54,9 @@ Client.on('message', (message) => {
         }
 
     });
-    if (message.channel.id = '802296637497016320')
+
+    const imageChannels = ['802741630591303720', '795761260062441513']
+    if (imageChannels.includes(message.channel.id))
     if (message.attachments.size > 0 || message.content.includes("://") || message.author.bot) {
         message.react("⏫").then(message.react('⏬'))
     } else { 

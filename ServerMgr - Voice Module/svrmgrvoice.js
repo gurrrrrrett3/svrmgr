@@ -1,6 +1,11 @@
 const Discord = require('discord.js');
 const Client = new Discord.Client();
 const dotenv = require('dotenv');
+const say = require('say');
+const { OpusEncoder } = require('@discordjs/opus');
+const fs = require('fs')
+const Canvas = require('canvas');
+
 dotenv.config();
 
 console.log("Voice Module Starting...");
@@ -31,8 +36,8 @@ Client.on('voiceStateUpdate', (oldState, newState) => {
             return
         } else {
 
-            const privateChannels = ["792583362237825064"]
-            const creationLocation = "792586199847141376"
+            const privateChannels = ["802916005755879496"]
+            const creationLocation = "802914406739607563"
 
             if (privateChannels.includes(newState.channel.id)) {
                 //Create Channel
@@ -77,6 +82,10 @@ Client.on('message', (message) => {
 
     if (message.author.bot) return;
 
+    if (message.content === '!join') {
+		Client.emit('guildMemberAdd', message.member);
+	}
+
     const parts = message.content.split(' ')
     if (parts[0] == '+') {
 
@@ -92,6 +101,7 @@ Client.on('message', (message) => {
 
                 const ownedChannel = message.member.voice.channel
                 const mentionedUser = message.mentions.users.first()
+                const mentionedMember = message.mentions.members.first()
                 ownedChannel.updateOverwrite(mentionedUser, {
                     CONNECT: true,
                     SPEAK: true,
@@ -194,9 +204,35 @@ Client.on('message', (message) => {
 
 
     }
+    })
+    
+
+    Client.on('guildMemberAdd', async member => {
+        const channel = member.guild.channels.cache.find(ch => ch.name === 'welcome');
+        if (!channel) return;
+        
+        // Set a new canvas to the dimensions of 700x250 pixels
+	const canvas = Canvas.createCanvas(1245, 954);
+	// ctx (context) will be used to modify a lot of the canvas
+
+    const ctx = canvas.getContext('2d');
+    // Since the image takes time to load, you should await it
+	const background = await Canvas.loadImage('./wallpaper.png');
+	// This uses the canvas dimensions to stretch the image onto the entire canvas
+    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+    //add text
+    ctx.font = '72px sans-serif';
+	ctx.fillStyle = '#ffffff';
+    ctx.fillText(`As you can tell,`, 450, 420);
+    ctx.fillText(`${member.displayName} has been arrive`, 180, 920);
+
+	// Use helpful Attachment class structure to process the file for you
+    const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
+    
+    channel.send(`Welcome to the server, ${member}!`, attachment);
 
     
-})
+    })
 
 
 
@@ -206,6 +242,8 @@ function SendErrorEmbed(title, message) {
         .setTitle(title)
         .setDescription(message)
         .setColor("#FF0000")
+        .setTimestamp()
+        .setFooter("SvrMgr: Voice Module")
     return errorEmbed
 }
 
@@ -214,6 +252,8 @@ function SendSucessEmbed(title, message) {
         .setTitle(title)
         .setDescription(message)
         .setColor("#00FF00")
+        .setTimestamp()
+        .setFooter("SvrMgr: Voice Module")
     return sucessEmbed
 }
 
@@ -232,9 +272,10 @@ function SendCorrectUsageEmbed(reason) {
             name: 'Example Usage',
             value: "++ MC_Bedwars 4 | Would create a channel named MC_Bedwars with a user limit of 4"
         })
+        .setTimestamp()
+        .setFooter("SvrMgr: Voice Module")
     return CUEmbed
 }
-
 
 
 
