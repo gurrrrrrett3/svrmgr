@@ -19,7 +19,7 @@ Client.on('message', (message) => {
 
     if (message.author.bot) return;
     const parts = message.content.split(' ')
-    if(message.member.roles.cache.find(r => r.name === "Bot Manager")) { //Moderator ONLY
+    if(message.member.roles.cache.find(r => r.name === "Mods")) { //Moderator ONLY
 
         if (parts[0] == ";ranch") {
             const ranchRole = message.guild.roles.cache.find(r => r.name === "Ranched")
