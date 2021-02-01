@@ -1,9 +1,6 @@
 const Discord = require('discord.js');
 const Client = new Discord.Client();
 const dotenv = require('dotenv');
-const say = require('say');
-const { OpusEncoder } = require('@discordjs/opus');
-const fs = require('fs')
 const Canvas = require('canvas');
 
 dotenv.config();
@@ -36,8 +33,8 @@ Client.on('voiceStateUpdate', (oldState, newState) => {
             return
         } else {
 
-            const privateChannels = ["802916005755879496"]
-            const creationLocation = "802914406739607563"
+            const privateChannels = ["805765637804130375"]
+            const creationLocation = "805765393732861994"
 
             if (privateChannels.includes(newState.channel.id)) {
                 //Create Channel
@@ -179,7 +176,7 @@ Client.on('message', (message) => {
 
         const host = message.member.user.username
         const channelName = `${parts[1]} | ${host} | ⚙`
-        const creationLocation = "793291229655203871"
+        const creationLocation = "805765393732861994"
         const userLimit = parts[2]
 
         message.member.guild.channels.create(
