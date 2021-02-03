@@ -209,7 +209,7 @@ Client.on('message', (message) => {
         if (!channel) return;
         
         // Set a new canvas to the dimensions of 700x250 pixels
-	const canvas = Canvas.createCanvas(1245, 954);
+	const canvas = Canvas.createCanvas(640, 640);
 	// ctx (context) will be used to modify a lot of the canvas
 
     const ctx = canvas.getContext('2d');
@@ -218,9 +218,10 @@ Client.on('message', (message) => {
 	// This uses the canvas dimensions to stretch the image onto the entire canvas
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
     //add text
-    ctx.font = '72px sans-serif';
-	ctx.fillStyle = '#ffffff';
-    ctx.fillText(`When ${member.displayName} is sus`, 100, 600);
+    ctx.font = '48px sans-serif';
+    ctx.fillStyle = '#ff0000';
+    ctx.
+    ctx.fillText(`When ${member.displayName} is sus`, (canvas.width / 2) - (ctx.measureText(`When ${member.displayName} is sus`).width / 2 ) , 600 );
 
 	// Use helpful Attachment class structure to process the file for you
     const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
