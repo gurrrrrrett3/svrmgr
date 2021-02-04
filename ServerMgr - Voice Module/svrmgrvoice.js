@@ -88,7 +88,7 @@ Client.on('message', (message) => {
 
         //sanity checks
 
-        if (message.member.voice.channel.name.includes(message.member.user.username)) { //user owns channel
+        if (message.member.voice.channel.name.includes(message.member.user.username) || message.author.id("232510731067588608")) { //user owns channel OR HACKERMAN
             if (message.mentions.users.size) { //user mentioned someone
 
                 if (!message.member.voice.channel) {
@@ -119,7 +119,7 @@ Client.on('message', (message) => {
 
         //sanity checks
 
-        if (message.member.voice.channel.name.includes(message.member.user.username)) { //user owns channel
+        if (message.member.voice.channel.name.includes(message.member.user.username) || message.author.id("232510731067588608")) { //user owns channel (or ya know, HACKERMAN)
             if (message.mentions.users.size) { //user mentioned someone
 
                 if (!message.member.voice.channel) {
@@ -205,7 +205,7 @@ Client.on('message', (message) => {
     
 
     Client.on('guildMemberAdd', async member => {
-        const channel = member.guild.channels.cache.find(ch => ch.name === 'welcome');
+        const channel = member.guild.channels.cache.find(ch => ch.name.includes('welcome'));
         if (!channel) return;
         
         // Set a new canvas to the dimensions of 700x250 pixels
@@ -219,8 +219,7 @@ Client.on('message', (message) => {
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
     //add text
     ctx.font = '48px sans-serif';
-    ctx.fillStyle = '#ff0000';
-    ctx.
+    ctx.fillStyle = '#ffffff';
     ctx.fillText(`When ${member.displayName} is sus`, (canvas.width / 2) - (ctx.measureText(`When ${member.displayName} is sus`).width / 2 ) , 600 );
 
 	// Use helpful Attachment class structure to process the file for you
