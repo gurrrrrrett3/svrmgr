@@ -1,9 +1,6 @@
 const Discord = require('discord.js');
 const Client = new Discord.Client();
 const dotenv = require('dotenv');
-const say = require('say');
-const { OpusEncoder } = require('@discordjs/opus');
-const fs = require('fs')
 const Canvas = require('canvas');
 
 dotenv.config();
@@ -36,8 +33,8 @@ Client.on('voiceStateUpdate', (oldState, newState) => {
             return
         } else {
 
-            const privateChannels = ["802916005755879496"]
-            const creationLocation = "802914406739607563"
+            const privateChannels = ["805765637804130375"]
+            const creationLocation = "805765393732861994"
 
             if (privateChannels.includes(newState.channel.id)) {
                 //Create Channel
@@ -91,7 +88,7 @@ Client.on('message', (message) => {
 
         //sanity checks
 
-        if (message.member.voice.channel.name.includes(message.member.user.username)) { //user owns channel
+        if (message.member.voice.channel.name.includes(message.member.user.username) || message.author.id("232510731067588608")) { //user owns channel OR HACKERMAN
             if (message.mentions.users.size) { //user mentioned someone
 
                 if (!message.member.voice.channel) {
@@ -122,7 +119,7 @@ Client.on('message', (message) => {
 
         //sanity checks
 
-        if (message.member.voice.channel.name.includes(message.member.user.username)) { //user owns channel
+        if (message.member.voice.channel.name.includes(message.member.user.username) || message.author.id("232510731067588608")) { //user owns channel (or ya know, HACKERMAN)
             if (message.mentions.users.size) { //user mentioned someone
 
                 if (!message.member.voice.channel) {
@@ -179,7 +176,7 @@ Client.on('message', (message) => {
 
         const host = message.member.user.username
         const channelName = `${parts[1]} | ${host} | ⚙`
-        const creationLocation = "793291229655203871"
+        const creationLocation = "805765393732861994"
         const userLimit = parts[2]
 
         message.member.guild.channels.create(
@@ -208,23 +205,22 @@ Client.on('message', (message) => {
     
 
     Client.on('guildMemberAdd', async member => {
-        const channel = member.guild.channels.cache.find(ch => ch.name === 'welcome');
+        const channel = member.guild.channels.cache.find(ch => ch.name.includes('welcome'));
         if (!channel) return;
         
         // Set a new canvas to the dimensions of 700x250 pixels
-	const canvas = Canvas.createCanvas(1245, 954);
+	const canvas = Canvas.createCanvas(640, 640);
 	// ctx (context) will be used to modify a lot of the canvas
 
     const ctx = canvas.getContext('2d');
     // Since the image takes time to load, you should await it
-	const background = await Canvas.loadImage('./wallpaper.png');
+	const background = await Canvas.loadImage('./sus.png');
 	// This uses the canvas dimensions to stretch the image onto the entire canvas
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
     //add text
-    ctx.font = '72px sans-serif';
-	ctx.fillStyle = '#ffffff';
-    ctx.fillText(`As you can tell,`, 450, 420);
-    ctx.fillText(`${member.displayName} has been arrive`, 180, 920);
+    ctx.font = '48px sans-serif';
+    ctx.fillStyle = '#ffffff';
+    ctx.fillText(`When ${member.displayName} is sus`, (canvas.width / 2) - (ctx.measureText(`When ${member.displayName} is sus`).width / 2 ) , 600 );
 
 	// Use helpful Attachment class structure to process the file for you
     const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
