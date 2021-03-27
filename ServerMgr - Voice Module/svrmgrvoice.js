@@ -33,8 +33,8 @@ Client.on('voiceStateUpdate', (oldState, newState) => {
             return
         } else {
 
-            const privateChannels = ["805765637804130375"]
-            const creationLocation = "805765393732861994"
+            const privateChannels = ["825191412566851655"]
+            const creationLocation = "825184917692350504"
 
             if (privateChannels.includes(newState.channel.id)) {
                 //Create Channel
@@ -176,7 +176,7 @@ Client.on('message', (message) => {
 
         const host = message.member.user.username
         const channelName = `${parts[1]} | ${host} | ⚙`
-        const creationLocation = "805765393732861994"
+        const creationLocation = "825184917692350504"
         const userLimit = parts[2]
 
         message.member.guild.channels.create(
@@ -199,6 +199,12 @@ Client.on('message', (message) => {
 
 
 
+
+    }
+
+    if (parts[0] == ';help') {
+
+        message.channel.send(SendHelpEmbed())
 
     }
     })
@@ -273,6 +279,23 @@ function SendCorrectUsageEmbed(reason) {
     return CUEmbed
 }
 
-
-
+function SendHelpEmbed() {
+    const HelpEmbed = new Discord.MessageEmbed()
+        .setTitle("Help")
+        .setDescription("Use this to create and manage private channels!")
+        .setColor("#00FF00")
+        .addFields({
+            name: '+',
+            value: "Adds a user to your private channel.\nSyntax: `+ <Mention>`"
+        }, {
+            name: '-',
+            value: "Removes someone from your private channel.\nSyntax: `- <Mention>`"
+        }, {
+            name: '++',
+            value: "Creates a looking for group post, that people can join!\nSyntax: `++ <Name> <Players Needed>`"
+        })
+        .setTimestamp()
+        .setFooter("SvrMgr: Voice Module")
+    return HelpEmbed
+    }
 Client.login(process.env.TOKEN)
